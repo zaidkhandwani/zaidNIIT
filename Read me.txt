@@ -1,0 +1,27 @@
+This is spring mvc based ecommerce portal.
+
+----Till now progress:----
+1) Front End:
+	Home page
+	Registration Page
+	Login Page
+	Category Pages
+	Product Pages
+	Validations At All Levels
+
+2) Backend:
+	User Module with validating & differentiating User and Admin Accounts.
+	Product Module with MultipartFile to Upload Product Image.
+
+
+-------Future Plan:-------
+1) Front End:
+	Search Box
+	Cart Page and Interface
+	WebFLow
+	Payment Section
+	Spring Security
+
+2) Back End:
+	Category Module (If Required)
+	Supplier Module (If Required)
