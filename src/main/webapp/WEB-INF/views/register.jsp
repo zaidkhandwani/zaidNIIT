@@ -98,47 +98,43 @@ footer {
 					<li><a href="#">Track Order</a></li>
 					<li><a href="contact">Contact Us</a></li>
 				</ul>
-				<ul class="nav navbar-nav navbar-right">
-
-					<li><a href="login"><span
-							class="glyphicon glyphicon-log-in"></span> Login</a></li>
-					<li><a href="#"><span
-							class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-				</ul>
+				
 			</div>
 		</div>
 	</nav>
 
-<form:form action="addUser" method="post" enctype="multipart/form-data">
+<form:form  modelAttribute="User">
 <div class="container">
 
 <div class="form-group">
-<form name='registration' onSubmit="return formValidation();">    
+    
 
-<label for="uid">User id:</label>  
-<input type="text" class="form-control" name="uid" placeholder="Enter User id" pattern=".{6,15}" title="Username should not be less than 6 char and more than 15 char" required/> 
-<label for="upassword">Password:</label>  
-<input type="password" class="form-control" name="upassword" placeholder="Enter Password" pattern=".{6,15}" title="Password should not be less than 6 char and more than 15 char" required/>  
-<label for="uname">Name:</label>  
-<input type="text" class="form-control" name="uname" placeholder="Enter Name" pattern="[A-Za-z]{6,15}" title="Name should not be alphanumeric and should be between 6 to 15 char" required/> 
-<label for="uaddress">Address:</label>  
-<input type="text" class="form-control" name="uaddress" placeholder="Enter Address" required/> 
-<label for="ucountry">Country:</label><br>
-<select name="ucountry">  
-<option selected="" value="Default" required>(Please select a country)</option>  
+<form:label path="uid">User id:</form:label>  
+<form:input path="uid" type="text" class="form-control" name="uid" placeholder="Enter User id" pattern=".{6,15}" title="Username should not be less than 6 char and more than 15 char" required="true"/> 
+<form:label path="upassword">Password:</form:label>  
+<form:input path="upassword" type="password" class="form-control" name="upassword" placeholder="Enter Password" pattern=".{6,15}" title="Password should not be less than 6 char and more than 15 char" required="true"/>  
+<form:label path="uname">Name:</form:label>  
+<form:input path="uname" type="text" class="form-control" name="uname" placeholder="Enter Name" pattern="[A-Za-z]{6,15}" title="Name should not be alphanumeric and should be between 6 to 15 char" required="true"/> 
+<form:label path="uaddress">Address:</form:label>  
+<form:input path="uaddress" type="text" class="form-control" name="uaddress" placeholder="Enter Address" required="true"/>
+<form:label path="umobile">Mobile:</form:label>  
+<form:input path="umobile" type="text" class="form-control" name="uaddress" placeholder="Enter Mobile No." pattern="\d{10}" title="Invalid Mobile Number" required="true"/> 
+<form:label path="ucountry">Country:</form:label><br>
+<select  name="ucountry">  
+<option selected="" value="Default" required="true">(Please select a country)</option>  
 <option value="India">India</option>  
 <option value="Australia">Australia</option>  
 <option value="Canada">Canada</option>  
 <option value="Russia">Russia</option>  
 <option value="China">China</option>  
 </select> 
-<br><label for="uzip">ZIP Code:</label>  
-<input type="text" class="form-control" name="uzip" placeholder="Enter ZIP Code" pattern="\d{6}" title="Invalid ZIP format" required/> 
-<label for="umail">Email Id:</label>
-<input type="text" class="form-control" name="umail" size="50" placeholder="Enter Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required/>
+<br><form:label path="uzip">ZIP Code:</form:label> 
+<form:input path="uzip" type="text" class="form-control" name="uzip" placeholder="Enter ZIP Code" pattern="\d{6}" title="Invalid ZIP format" required="true"/> 
+<form:label path="umail">Email Id:</form:label>
+<form:input path="umail" type="text" class="form-control" name="umail" size="50" placeholder="Enter Email Id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required="true"/>
 <br>  
-<label id="gender">Sex:</label>  
-<label class="radio-inline" required>
+<form:label path="usex">Sex:</form:label>  
+<label class="radio-inline" required="true">
       <input type="radio" name="usex" id="msex" value="Male" >Male
     </label>
     <label class="radio-inline">
@@ -149,10 +145,10 @@ footer {
 <br>
 
  
-<br><input type="submit" class="btn btn-primary active" name="submit" value="Register" /><br>
+
+  <input name="_eventId_submit" type="submit" class="btn btn-info active" value="Register" />
   
-  
-</form>
+
 </div>
 </div>
 </form:form>

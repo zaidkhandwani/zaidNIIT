@@ -112,11 +112,12 @@
 			
 	<li>
 <label for="password">Password</label>
-<input type="password" name="password" placeholder="Password" required></li>
+<input type="password" name="password" id="password" placeholder="Password" required></li>
 			
 	<li>
 <input name="submit" type="submit" value="Login">
 </li>
+<li><input type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'"> Show password</li>
 </ul>
 </form>
 

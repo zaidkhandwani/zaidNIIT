@@ -8,14 +8,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+import java.io.Serializable;
 import org.hibernate.Query;
 import org.springframework.stereotype.Component;
 
 @Entity
 @Table(name = "USER")
 @Component
-public class User {
+
+
+public class User implements Serializable {
+	
+
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private String id;
 	private String uid;
@@ -23,17 +32,16 @@ public class User {
 	private String uname;
 	private String uaddress;
 	private String ucountry;
-	private int uzip;
+	private String uzip;
 	private String umail;
 	private String usex;
-	private String role;
-	private int admin;
 	
+	private int admin;
+	private String umobile;
 	
 	@Id
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	
 	
 	public String getId() {
 		return id;
@@ -71,10 +79,10 @@ public class User {
 	public void setUcountry(String ucountry) {
 		this.ucountry = ucountry;
 	}
-	public int getUzip() {
+	public String getUzip() {
 		return uzip;
 	}
-	public void setUzip(int uzip) {
+	public void setUzip(String uzip) {
 		this.uzip = uzip;
 	}
 	public String getUmail() {
@@ -89,19 +97,24 @@ public class User {
 	public void setUsex(String usex) {
 		this.usex = usex;
 	}
-	public String getRole() {
-		return role;
-	}
-	
-	public void setRole(String role) {
-		this.role = role;
-	}
 	public int getAdmin() {
 		return admin;
 	}
 	public void setAdmin(int admin) {
 		this.admin = admin;
 	}
+	public String getUmobile() {
+		return umobile;
+	}
+	public void setUmobile(String umobile) {
+		this.umobile = umobile;
+	}
+	
+	
+	
+	
+	
+	
 	
 	
 	

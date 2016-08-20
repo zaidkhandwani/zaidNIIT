@@ -101,7 +101,7 @@ footer {
 					<li><a href="#">${message}</a></li>
 					
 					<c:if test="${isRegister==true}">
-					<li><a href="register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+					<li><a href="memberShip"><span class="glyphicon glyphicon-user"></span> Register</a></li>
 					</c:if>
 					
 					<c:if test="${isLogin==true}">

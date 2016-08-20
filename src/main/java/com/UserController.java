@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 @Controller
 public class UserController {
@@ -34,21 +38,27 @@ public class UserController {
 
 	@Autowired
 	ServletContext req;
-
+	
+	@Autowired
+    private JavaMailSender mailSender;
+	
 	@RequestMapping("/addUser")
-	public ModelAndView addUser(@ModelAttribute User user) {
-		user.setRole("User");
+	public String addUser(@ModelAttribute User user) {
+		
 		userDAO.saveOrUpdate(user);
-		String message;
-
-		ModelAndView mv;
-
-		message = "Registration Successful! Please Login";
-		mv = new ModelAndView("login");
-
-		mv.addObject("message", message);
-
-		return mv;
+		String status = "success";
+		String subject = "Registration Successfull !";
+		String emailText= "Congratulation !! You have succesfully registered with electronica.. Start Shopping..";
+		
+		System.out.println("To: " + user.getUmail());
+		SimpleMailMessage email = new SimpleMailMessage();
+		email.setTo(user.getUmail());
+		email.setSubject(subject);
+		email.setText(emailText);
+		
+		mailSender.send(email);
+		
+		return status;
 
 	}
 
