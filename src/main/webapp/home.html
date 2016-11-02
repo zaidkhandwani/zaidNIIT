@@ -1,0 +1,146 @@
+
+
+<body class="ng-cloak">
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="generic-container" ng-controller="UserController as ctrl">
+
+
+<div class="formcontainer">
+
+	<br>
+	
+	<div class="container-fluid">
+
+		<div class="row">
+			<div class="col-sm-6">
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <ol class="carousel-indicators">
+    <li data-target="#/" data-slide-to="0" class="active"></li>
+    <li data-target="#/" data-slide-to="1"></li>
+    <li data-target="#/" data-slide-to="2"></li>
+    <li data-target="#/" data-slide-to="3"></li>
+  </ol>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <div class="item active">
+      <img src="resources\images\diginxt.png" alt="DIGINXT">
+      <div class="carousel-caption">
+        <h3>DIGINXT</h3>
+        
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="resources\images\niityouth.jpg" alt="NIIT">
+      <div class="carousel-caption">
+        <h3>NIIT</h3>
+      
+      </div>
+    </div>
+
+    <div class="item">
+      <img src="resources\images\niit2.jpg" alt="GNIIT">
+      <div class="carousel-caption">
+        <h3>GNIIT</h3>
+    
+      </div>
+    </div>
+
+    
+  </div>
+
+
+</div>
+			</div>
+			<div class="col-sm-4">
+
+				<br> <br>
+				<div ng-if="currentUser.errorMessage"> 
+				<div  class="alert alert-danger" style="width: 500px;">
+                          {{currentUser.errorMessage}}
+                </div>
+				
+				</div>
+
+
+				<p style="color: #008ae6;">
+					<b>Sign-in</b>
+				</p>
+				<form ng-submit="ctrl.login()" name="myForm" enctype="multipart/form-data">
+					<div class="form-group">
+
+						<input type="text" ng-model="ctrl.user.userId" id="userId" class="form-control" 
+							style="width: 500px;" placeholder="Enter UserId or Email">
+					</div>
+					<div class="form-group">
+
+						<input type="password" ng-model="ctrl.user.password" id="password" class="form-control" 
+							style="width: 500px;" placeholder="Enter password">
+					</div>
+					<div class="checkbox">
+						<label><input type="checkbox"> Remember me</label>
+					</div>
+					<button type="submit" class="btn btn-success" style="width: 500px;">Login</button>
+				</form>
+				<br>
+				<p style="color: #008ae6;">
+					<b>Sign-up</b>
+				</p>
+				<form ng-submit="ctrl.submit()" name="myForm" enctype="multipart/form-data">
+					<div class="form-group">
+
+						<input type="text" ng-model="ctrl.user.userId" id="userId" class="form-control" 
+							style="width: 500px;" placeholder="Username">
+					</div>
+					
+					<div class="form-group">
+
+						<input type="text" ng-model="ctrl.user.name" id="name" class="form-control" 
+							style="width: 500px;" placeholder="Enter your name">
+					</div>
+					<div class="form-group">
+
+						<input type="email" ng-model="ctrl.user.email" id="email" class="form-control" 
+							style="width: 500px;" placeholder="Enter email">
+					</div>
+					<div class="form-group">
+
+						<input type="password" class="form-control" ng-model="ctrl.user.password" id="password"
+							style="width: 500px;" placeholder="Enter password">
+					</div>
+					<div class="form-group">
+
+						<input type="tel" class="form-control" ng-model="ctrl.user.mobile" id="mobile"
+							style="width: 500px;" placeholder="Mobile no.">
+					</div>
+					<div class="form-group">
+						<label class="radio-inline">
+						<input type="radio" ng-model="ctrl.user.role" id="role" name="optradio" value="Student">Student
+						</label>
+						<label class="radio-inline">
+						<input type="radio" ng-model="ctrl.user.role" id="role" name="optradio" value="Alumni">Alumni
+						</label>
+						<label class="radio-inline">
+						<input type="radio" ng-model="ctrl.user.role" id="role" name="optradio" value="Employee">Employee
+						</label>
+					</div>
+					
+					<button type="submit" class="btn btn-danger" style="width: 500px;">Register</button>
+				</form>
+
+
+			</div>
+		</div>
+
+
+	</div>
+	</div>
+</div>
+
+	</body>

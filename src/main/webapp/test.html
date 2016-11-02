@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+<head>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="resources/css/hexagons.css">
+        <link href='https://fonts.googleapis.com/css?family=Raleway:300' rel='stylesheet' type='text/css'>
+    </head>
+    <body class="ng-cloak">
+    <br>
+    <br>
+    <br>
+    <br>
+     <br>
+    <br>
+    <br>
+    <br>
+     <br>
+    <br>
+    <br>
+    <div class="generic-container" ng-controller="UserController as ctrl">
+        <ul id="hexGrid">
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\blog.jpg" alt="" />
+                    <h1>Blogs</h1>
+                    <p>Keep Blogging..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\events.jpg" alt="" />
+                    <h1>Events</h1>
+                    <p>Participate in upcoming events..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\news.jpg" alt="" />
+                    <h1>News</h1>
+                    <p>Latest News..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\job.jpg" alt="" />
+                    <h1>Jobs</h1>
+                    <p>Build your career..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\forum.jpg" alt="" />
+                    <h1>Forum</h1>
+                    <p>Show your review..</p>
+                </a>
+            </li>
+
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\friends.jpg" alt="" />
+                    <h1>Friends</h1>
+                    <p>My Buddies..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\notification.jpg" alt="" />
+                    <h1>Notification</h1>
+                    <p>Pings for you..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\chat.jpg" alt="" />
+                    <h1>Chat</h1>
+                    <p>Connect socially..</p>
+                </a>
+            </li>
+            <li class="hex">
+                <a class="hexIn" href="#">
+                    <img src="resources\images\groups.jpg" alt="" />
+                    <h1>Groups</h1>
+                    <p>My Gang..</p>
+                </a>
+            </li>
+        </ul>
+        <br>
+        <br>
+        <br>
+    <div ng-if="currentUser.role=='Admin'"> 
+    <center><div class="btn-group">
+<button type="button" class="btn btn-danger" ng-click="ctrl.fetchAllPendingUsers()">
+      <span class="glyphicon glyphicon-user"></span> Registration Requests
+    </button>
+  <a href="#pendingblog"><button type="button" class="btn btn-primary">
+      <span class="glyphicon glyphicon-comment"></span> Manage Blogs
+    </button></a>
+  <a href="#pendingblog"><button type="button" class="btn btn-warning">
+      <span class="glyphicon glyphicon-music"></span> Manage Events
+    </button></a>
+    <a href="#pendingblog"><button type="button" class="btn btn-success">
+      <span class="glyphicon glyphicon-briefcase"></span> Manage Jobs
+    </button></a>
+    <a href="#pendingblog"><button type="button" class="btn btn-info">
+      <span class="glyphicon glyphicon-flash"></span> Manage News
+    </button></a>
+</div></center>
+</div>
+</div>
+    </body>
+    
+</html>

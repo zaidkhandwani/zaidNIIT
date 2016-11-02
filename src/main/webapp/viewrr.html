@@ -1,0 +1,38 @@
+<br>
+<br>
+<br>
+<br>
+
+
+<div class="container-fluid" id="fullwrapper">
+	<div class="generic-container" ng-controller="UserController as ctrl">
+	
+
+			
+				
+				<div>
+								<table class="table">
+								<thead>
+									<tr style="text-align: center;" height="40px">
+										<td>User ID</td>
+										<td>Name</td>
+										<td>Email</td>
+										<td>Mobile</td>
+										<td>Registered As</td>
+									</tr>
+								</thead>
+									<tr ng-repeat="user in ctrl.users">
+										<td>{{user.userId}}</td>
+										<td>{{user.name}}</td>
+										<td>{{user.email}}</td>
+										<td>{{user.mobile}}</td>
+										<td>{{user.role}}</td>
+										<td><button type="button" ng-click="myCtrl.deleteBlog(blog.id)" class="btn btn-warning custom-width">Accept</button></td>
+										<td><button type="button" ng-click="myCtrl.deleteBlog(blog.id)" class="btn btn-danger custom-width">Reject</button></td>
+									</tr>
+							</table>
+						</div>
+						</div>
+						</div>
+	
+		
