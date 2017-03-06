@@ -1,0 +1,320 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.IO.Ports;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using Excel = Microsoft.Office.Interop.Excel;
+namespace RFIDAttendance
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        Excel.Application xlapp = new Excel.Application();
+        Excel.Workbook xlwb,wb_record,wb_present;
+        Excel.Worksheet xlst,rec_sheet,ws_present;
+        String wdir;
+        
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            portsadd();
+            label1.Text = System.DateTime.Now.ToShortDateString();
+            serialPort1.ReadTimeout = 500;
+            wdir = Directory.GetCurrentDirectory();
+            
+            daySetter();
+            requiredFiles();
+            wb_present = xlapp.Workbooks.Add();
+            ws_present = wb_present.Worksheets[1];
+            ws_present.Cells[1, 1].Value = "RFID";
+            ws_present.Cells[1, 2].Value = "Roll No.";
+            ws_present.Cells[1, 3].Value = "Name";
+            ws_present.Cells[1, 4].Value = "Time of Entry";
+            backgroundWorker1.RunWorkerAsync();
+            comboBox1.Text = "";
+        }
+        private void requiredFiles()
+        {
+            wb_record = xlapp.Workbooks.Open(wdir + "\\Records.xlsx");
+            rec_sheet = (Excel.Worksheet) wb_record.Sheets[1];
+            //MessageBox.Show((String) rec_sheet.Cells[3, 2].Value);
+        }
+        private void portsadd()
+        {
+            String[] ports = SerialPort.GetPortNames();
+            comboBox1.Items.AddRange(ports);
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!serialPort1.IsOpen)
+            {
+                if (comboBox1.Text == "")
+                    MessageBox.Show("Please select a COM Port");
+                else
+                {
+                    serialPort1.PortName = comboBox1.Text;
+                    serialPort1.BaudRate = 9600;
+                    serialPort1.Parity = Parity.None;
+                    serialPort1.StopBits = StopBits.One;
+                    try
+                    {
+                        serialPort1.Open();
+                        progressBar1.Value = 1;
+                        button1.Text = "Close Port";
+                        backgroundWorker2.RunWorkerAsync();
+                    }
+                    catch (Exception ee)
+                    {
+                        MessageBox.Show(ee.ToString());
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    serialPort1.Close();
+                    progressBar1.Value = 0;
+                    button1.Text = "Open Port";
+                    backgroundWorker2.CancelAsync();
+                }
+                catch (Exception exc) { }
+            }
+        }
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            TimeSpan c1 = new TimeSpan(8, 20, 00);
+            TimeSpan c2 = new TimeSpan(9, 10, 00);
+            TimeSpan c3 = new TimeSpan(10, 00, 00);
+            TimeSpan c4 = new TimeSpan(11, 20, 00);
+            TimeSpan c5 = new TimeSpan(12, 10, 00);
+            TimeSpan c6 = new TimeSpan(13, 20, 00);
+            TimeSpan c7 = new TimeSpan(14, 10, 00);
+            TimeSpan c8 = new TimeSpan(14, 40, 00);
+            TimeSpan newDay = new TimeSpan(00, 01, 00);
+            /*
+            TimeSpan c1 = new TimeSpan(22, 00, 00);
+            TimeSpan c2 = new TimeSpan(22, 03, 00);
+            TimeSpan c3 = new TimeSpan(22, 06, 00);
+            TimeSpan c4 = new TimeSpan(22, 09, 00);
+            TimeSpan c5 = new TimeSpan(22, 12, 00);
+            TimeSpan c6 = new TimeSpan(22, 15, 00);
+            TimeSpan c7 = new TimeSpan(22, 18, 00);
+            TimeSpan c8 = new TimeSpan(22, 21, 00);
+            */
+            TimeSpan now = DateTime.Now.TimeOfDay;
+            if ((now > (c1 - new TimeSpan(0, 1, 0))) && (now < c1))
+            {
+                
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "7-30 to 8-20";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c2 - new TimeSpan(0, 1, 0))) && (now < c2))
+            {
+                
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "8-20 to 9-10";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c3 - new TimeSpan(0, 1, 0))) && (now < c3))
+            {
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "9-10 to 10-00";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c4 - new TimeSpan(0, 1, 0))) && (now < c4))
+            {
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "10-30 to 11-20";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c5 - new TimeSpan(0, 1, 0))) && (now < c5))
+            {
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "11-20 to 12-10";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c6 - new TimeSpan(0, 1, 0))) && (now < c6))
+            {
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "12-30 to 13-20";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c7 - new TimeSpan(0, 1, 0))) && (now < c7))
+            {
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "13-20 to 14-10";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (c8 - new TimeSpan(0, 1, 0))) && (now < c8))
+            {
+                xlst = xlwb.Worksheets.Add();
+                xlst.Name = "14-10 to 14-40";
+                Excel.Range range = ws_present.UsedRange;
+                range.Copy();
+                xlst.Paste();
+                Marshal.ReleaseComObject(xlst);
+                xlwb.Save();
+                Thread.Sleep(60000);
+            }
+            if ((now > (newDay - new TimeSpan(0, 1, 0))) && (now < newDay))
+            {
+                //MessageBox.Show("New Day");
+                daySetter();
+                Thread.Sleep(60000);
+            }
+            Thread.Sleep(500);
+        }
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            backgroundWorker1.RunWorkerAsync();
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            wb_present.SaveAs(wdir + "\\temp.xlsx");
+        }
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            wb_present.Close(false, Type.Missing, Type.Missing);
+            wb_record.Close(false, Type.Missing, Type.Missing);
+            xlwb.Close(false, Type.Missing, Type.Missing);
+            xlapp.Quit();
+        }
+        private void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
+        {
+            if(serialPort1.IsOpen)
+            {
+                if (serialPort1.BytesToRead > 0)
+                {
+                    String scanned = "";
+                    for (int i = 0; i < 12; i++)
+                    {
+                        char c = (char) serialPort1.ReadChar();
+                        scanned += c;
+                    }
+                    Excel.Range rng = rec_sheet.UsedRange;
+                    for(int i=0; i< rng.Rows.Count-1; i++)
+                    {
+                        if (scanned == (String) rec_sheet.Cells[i + 2, 3].Value)
+                        {
+                            if (check_present(scanned))
+                            {
+                                if ((String)rec_sheet.Cells[i + 2, 2].Value == "Teacher")
+                                    //MessageBox.Show((String)rec_sheet.Cells[i + 2, 1].Value);
+                                //MessageBox.Show("True");
+                                    label1.Invoke((MethodInvoker)delegate { label1.Text = (String)rec_sheet.Cells[i + 2, 1].Value; });
+                            }
+                            else
+                            {
+                                
+                                //MessageBox.Show("False");
+                            }
+                            Excel.Range rng2 = ws_present.UsedRange;
+                            int rcnt = rng2.Rows.Count;
+                            int stud_cnt = 0;
+                            for (int j = 2; j <= rcnt; j++)
+                            {
+                                if ((Double)ws_present.Cells[j, 2].Value > 0)
+                                    stud_cnt++;
+                            }
+                            label2.Invoke((MethodInvoker)delegate { label2.Text = "No. of Students :" + stud_cnt.ToString(); });
+                        }
+                    }
+                }
+            }
+        }
+        private bool check_present(String scan)
+        {
+            Excel.Range rng = ws_present.UsedRange;
+            int rcnt = rng.Rows.Count;
+            //MessageBox.Show(rcnt.ToString());
+            for (int i = 1; i <= rcnt; i++)
+            {
+                if (scan == (String)ws_present.Cells[i, 1].Value)
+                {
+                    if((Double)ws_present.Cells[i, 2].Value<0)
+                        label1.Invoke((MethodInvoker)delegate { label1.Text = " " ; });
+                    ((Excel.Range)ws_present.Rows[i, Missing.Value]).Delete(Excel.XlDeleteShiftDirection.xlShiftUp);
+                    return false;
+                }
+            }
+            Excel.Range rng2 = rec_sheet.UsedRange;
+            for (int i = 0; i < rng2.Rows.Count - 1; i++)
+            {
+                if (scan == (String)rec_sheet.Cells[i + 2, 3].Value)
+                {
+                    ws_present.Cells[rcnt + 1, 1].Value = scan;
+                    ws_present.Cells[rcnt + 1, 2].Value = rec_sheet.Cells[i + 2, 4].Value;
+                    ws_present.Cells[rcnt + 1, 3].Value = rec_sheet.Cells[i + 2, 1].Value;
+                    ws_present.Cells[rcnt + 1, 4].Value = DateTime.Now.ToLongTimeString();
+                    return true;
+                }
+            }
+            MessageBox.Show("Something's Wrong");
+            return false;     
+        }
+        private void backgroundWorker2_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            backgroundWorker2.RunWorkerAsync();
+        }
+        private void daySetter()
+        {
+            String filename = wdir + "\\" + DateTime.Now.ToShortDateString() + ".xlsx";
+            //MessageBox.Show(filename);
+            if (!File.Exists(filename))
+            {
+                xlwb = xlapp.Workbooks.Add();
+                xlwb.SaveAs(filename);
+                xlwb.Close();
+            }
+            xlwb = xlapp.Workbooks.Open(filename);
+        }
+    }
+}
